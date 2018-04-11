@@ -14,7 +14,7 @@ body {
 }
 
 a {
-  color: #2185d5;
+  color: #CD853F;
 }
 
 p {
@@ -86,12 +86,33 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 4em;
   position: absolute;
   top: 0;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
 }
 @media screen and (max-width: 768px) {
   .main-tab-wrap .main-tab-content {
     padding-left: .5em;
     padding-right: .5em;
   }
+}
+
+.main-content-photo img{
+  position: relative;
+  min-height: 1px;
+  margin: 10px;
+  padding: 0;
+  width:196px;
+  height:164px;
+  background: #c2c2c2;
+  border: 1px solid #000;
+  border-radius:10px;
+}
+
+.main-tab-text {
+  padding-bottom: 1em;
+  padding-top: 5em;
+  float: left;
+  width: 100%;
+  position: relative;
+  text-align: center;
 }
