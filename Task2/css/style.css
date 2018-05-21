@@ -120,3 +120,17 @@ code {
 hr {
 	color: black;
 }
+
+@media print {
+	.not-printable, img {
+		display: none;
+	}
+	.block-content {
+		width: 100%;
+	}
+	#poem-content {
+		width: 80%;
+		margin-left: 15%;
+		display: inline-block;
+	}
+}
