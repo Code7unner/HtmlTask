@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Jopa</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<h4 class="text-style">Площади</h4>
+
+	<form onsubmit="return getCircleS();">
+		<h4>1) Площадь круга</h4>
+        <label>Радиус круга </label>
+        <input type="text" min="0" step="0.1" class="ss" id="radius" placeholder="Радиус круга"/>
+        <input type="button" value="Output"onclick="getCircleS()"/>
+    </form>
+    <form onsubmit="return getRectangleS();">
+    	<h4>2) Площадь прямоугольника</h4>
+    	<label>Высота прямоугольника </label>
+    	<input type="text" min="0" step="0.1" class="ss" id="height-rec"
+    	placeholder="Высота прямоугольника"/><br>
+    	<label>Длина прямоугольника</label>
+    	<input type="text" min="0" step="0.1" class="ss" id="length-rec" placeholder="Длина прямоугольника"/>
+    	<input type="button" value="Output" onclick="getRectangleS()"/>
+    </form>
+    <form>
+    	<h4>3) Площадь треугольника</h4>
+    	<label>Высота треугольника</label>
+    	<input type="text" min="0" step="0.1" class="ss" id="height-tri" placeholder="Высота треугольника"/><br>
+    	<label>Длина основания</label>
+    	<input type="text" min="0" step="0.1" class="ss" id="length-tri" placeholder="Длина основания">
+    	<input type="button" value="Output" onclick="getTriangleS()">
+        <hr>
+    	<p id="answer"></p>
+    </form>
+    <div>
+    	<h4 class="text-style">Числа Фибоначчи</h4>
+    	<p>1, 1, 2, 3, 5, 8, 13, 21, 34,&nbsp[<span id="answer_2"></span>], ... </p>
+    	<label>Нажмите, чтобы увидеть 10ый член чисел Ф-чи </label><br>
+    	<input type="button" value="Press" onclick="getFibNum()">
+        <hr>
+    </div>
+    <div>
+        <h4>Работа с матрицами</h4>
+        <pre id="task3-src"></pre>
+        <p>
+            Задана матрица В(8,8). Поменять местами элементы столбца, содержащего большее число положительных элементов, и элементы главной диагонали.
+        </p>
+        <pre id="task3-dst"></pre>
+        
+    </div>
+
+	<script type="text/javascript" src="JQuery.js"></script>
+	<script type="text/javascript" src="q.js"></script>
+</body>
+</html>
