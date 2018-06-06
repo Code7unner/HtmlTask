@@ -30,8 +30,8 @@
     	<label>Длина основания</label>
     	<input type="text" min="0" step="0.1" class="ss" id="length-tri" placeholder="Длина основания">
     	<input type="button" value="Output" onclick="getTriangleS()">
-        <hr>
     	<p id="answer"></p>
+    	<hr>
     </form>
     <div>
     	<h4 class="text-style">Числа Фибоначчи</h4>
@@ -41,13 +41,29 @@
         <hr>
     </div>
     <div>
-        <h4>Работа с матрицами</h4>
+        <h4 class="text-style">Работа с матрицами</h4>
         <pre id="task3-src"></pre>
         <p>
             Задана матрица В(8,8). Поменять местами элементы столбца, содержащего большее число положительных элементов, и элементы главной диагонали.
         </p>
-        <pre id="task3-dst"></pre>
-        
+         <pre id="task3-dst"></pre>
+        <hr>
+    </div>
+    <div>
+    	<h4 class="text-style">Функции</h4>
+            <form onsubmit="return getSnakeMatrix();">
+                <label>Размерность матрицы </label>
+                <input type="number" min="2" max="16" step="1" value="8" id="task4-size" placeholder="Размерность матрицы"/>
+                <br>
+                <label>Минимальный элемент </label>
+                <input type="number" min="-100" max="100" value="-50" step="1" id="task4-min" placeholder="Минимальный элемент"/>
+                <br>
+                <label>Максимальный элемент </label>
+                <input type="number" min="-100" max="100" step="1" value="50" id="task4-max" placeholder="Максимальный элемент"/>
+                <br>
+                <input type="button" value="Output" onclick="getSnakeMatrix()">
+            </form>
+            <pre id="task4-result"></pre>
     </div>
 
 	<script type="text/javascript" src="JQuery.js"></script>
