@@ -205,17 +205,17 @@ function getSnakeMatrix() {
     let output = document.getElementById("task4-result");
     output.textContent = "";
     let size = document.getElementById("task4-size").value;
-    if (!isNumeric(size) || size < 2 || !Number.isInteger(size = parseFloat(size))) {
+    if (!isNum(size) || size < 2 || !Number.isInteger(size = parseFloat(size))) {
         output.textContent = "Некорректный размер матрицы!";
         return false;
     }
     let arrMin = document.getElementById("task4-min").value;
     let arrMax = document.getElementById("task4-max").value;
-    if (!isNumeric(arrMin) || !Number.isInteger(arrMin = parseFloat(arrMin))) {
+    if (!isNum(arrMin) || !Number.isInteger(arrMin = parseFloat(arrMin))) {
         output.textContent = "Некорректный минимум!";
         return false;
     }
-    if (!isNumeric(arrMax) || !Number.isInteger(arrMax = parseFloat(arrMax))) {
+    if (!isNum(arrMax) || !Number.isInteger(arrMax = parseFloat(arrMax))) {
         output.textContent = "Некорректный максимум!";
         return false;
     }
