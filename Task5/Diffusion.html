@@ -4,19 +4,55 @@
 	<title>Canvas & Mootools</title>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.js"></script>
 	<script type="text/javascript">
-		var canvas, ctx, balls, idTimer;
+		var canvas, ctx, idTimer;
+
+		function random(min, max) {
+            return min + Math.random() * (max - min);
+        }
+
+		const Direction = Object.freeze({
+			Up: "Up",
+			Down: "Down",
+			Left: "Left",
+			Right: "Right"
+		});
 
 		class Figures {
 			constructor(pX, pY, dir) {
 				this.posX = pX;
 				this.posY = pY;
+				this.speed = random(2,4);
 				this.dir = dir;
 				this.color = 'rgb('+Math.floor(Math.random()*256)+','
-				+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
+				+ Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
 			}
-			draw(ctx){
-				//----
-			}		
+			move() {
+				var speedMove = random(this.speed, 1.5 * this.speed);
+                var speedConv = random(-this.speed, this.speed);
+
+				switch(this.dir) {
+					case Direction.Up:
+                        this.posX += speedConv;
+                        this.posY -= speedMove;
+                        break;
+                    case Direction.Down:
+                        this.posX += speedConv;
+                        this.posY += speedMove;
+                        break;
+                    case Direction.Left:
+                        this.posX -= speedMove;
+                        this.posY += speedConv;
+                        break;
+                    case Direction.Right:
+                        this.posX += speedMove;
+                        this.posY += speedConv;
+                        break;
+				}
+			}
+			draw(ctx) {
+            }
+            size() {
+            }
 		}
 
 		class Ball extends Figures {
@@ -41,6 +77,9 @@
 			size() {
 				return this.radius;
 			}
+			move() {
+				super.move();
+			}
 		}
 
 		class Rectangle extends Figures {
@@ -64,6 +103,9 @@
 				ctx.closePath();
 				ctx.fill();
 			}
+			move() {
+				super.move();
+			}
 		}
 
 		class Square extends Rectangle {
@@ -74,6 +116,16 @@
 		}
 
 		const figureClasses = [Ball, Square, Rectangle];
+
+		function setDirection() {
+			var dir = Direction.Up;
+			document.getElementsByName('dir').forEach(elem => {
+				if (elem.checked) {
+					dir = Direction[elem.id];
+				}
+			})
+			return dir;
+        }
 
 		function drawBack(ctx,col1,col2,w,h){
 			// закрашиваем канвас градиентным фоном
@@ -92,49 +144,41 @@
 				ctx = canvas.getContext('2d');
 				//рисуем фон
 				drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
-				//создаем 10 шариков, заноси их в массив и выводим на canvas
-				balls = [];
-				rectangles = [];
-				squares = [];
-				for (var i = 1; i<=5;i++){
-					var item = new Ball(10+Math.random()*(canvas.width-30),
-					10+Math.random()*(canvas.height-30));
+				//создаем 10 фигур, заносим их в массив и выводим на canvas
+				masOfFigures = [];
+				for (var i = 1; i<=10;i++){
+					dir = setDirection();
+					var item = new createFigure(10+Math.random()*(canvas.width-30),
+					10+Math.random()*(canvas.height-30), dir);
 					item.draw(ctx);
-					balls.push(item);
-				}
-				for (var i = 1; i<=5;i++){
-					var item = new Rectangle(10+Math.random()*(canvas.width-30),
-					10+Math.random()*(canvas.height-30));
-					item.draw(ctx);
-					rectangles.push(item);
-				}
-				for (var i = 1; i<=5;i++){
-					var item = new Square(10+Math.random()*(canvas.width-30),
-					10+Math.random()*(canvas.height-30));
-					item.draw(ctx);
-					squares.push(item);
+					masOfFigures.push(item);
 				}
 			}
 		}
 
-		// создаем новый шарик по щелчку мыши, добавляем его в массив шариков и рисуем его
+		function createFigure(x, y, dir) {
+			var figureId = Math.floor(figureClasses.length * Math.random());
+			return new figureClasses[figureId](x, y, dir);
+		}
+
+		// создаем новую фугуру по щелчку мыши, добавляем ее в массив фигур и рисуем ее
 		function goInput(event){
 			var x = event.clientX;
 			var y = event.clientY;
-			var item = new Ball(x,y);
+			var item = new createFigure(x,y);
 			item.draw(ctx);
-			balls.push(item);
+			masOfFigures.push(item);
 		}
 
 		function moveFigures(){
-			//реализация движения шариков, находящихся в массиве balls
+			//реализация движения фигур, находящихся в массиве masOfFifures
 			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
-			for (var i = 0; i < balls.length;i){
-				balls[i].posX = balls[i].posX + (Math.random()*4-2);
-				balls[i].posY = balls[i].posY + (Math.random()*2-4);
-				balls[i].draw(ctx);
-				if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0)) 
-					balls.splice(i,1);
+			for (var i = 0; i < masOfFigures.length;){
+				masOfFigures[i].dir = setDirection();
+				masOfFigures[i].move();
+				masOfFigures[i].draw(ctx);
+				if ((masOfFigures[i].posX > canvas.width) || (masOfFigures[i].posX < 0) || (masOfFigures[i].posY < 0) || (masOfFigures[i].posY > canvas.height)) 
+					masOfFigures.splice(i,1);
 				else 
 					i++;
 			}
@@ -155,6 +199,12 @@
 	<form>
 		<input type = "button" value = "Движение" onclick="move()">
 		<input type = "button" value = "Стоп" onclick="clearInterval(idTimer);">
+	</form>
+	<form>
+		<p><input type="radio" name="dir" id="Up"><label>Up</label></p>
+		<p><input type="radio" name="dir" id="Down"><label>Down</label></p>
+		<p><input type="radio" name="dir" id="Right" checked><label>Right</label></p>
+		<p><input type="radio" name="dir" id="Left"><label>Left</label></p>
 	</form>
 </body>
 </html>
