@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style type="text/css">
+        #calculator * {font-size: 16px;}
+        #calculator table {border: solid 3px silver; border-spacing: 3px; background-color: #EEE; }
+        #calculator table td {border-spacing: 3px;}
+        .History{width: 254px; resize: none;}
+        input.display {width: 256px; text-align: right;}
+        td.buttons {border-top: solid 1px silver;}
+        input[type= button] {width: 40px; height: 30px;}
+        #MDBut{}
+        #MIBut{}
+    </style>
+</head>
+    <body>
+        <div class="page">
+            <div class="block-content">
+                <form name="calc" id="calculator">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" name="InputDis" id="InputDis" size="16" class="display">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="buttons">
+                                <input type="button" name="one" value="1" OnClick = NumInput(calc.one.value)>
+                                <input type="button" name="two" value="2" OnClick= NumInput(calc.two.value)>
+                                <input type="button" name="three" value="3" OnClick= NumInput(calc.three.value)>
+                                <input type="button" name="plus" value="+" OnClick= NumInput(calc.plus.value)>
+                                <input type="button" name="add" value="ln" OnClick= LN(calc.InputDis.value) >
+                                <input type="button" name="MPlus" value="M+" OnClick= MemPlus(calc.InputDis.value)>
+                                <br>
+                                <input type="button" name="four" value="4" OnClick= NumInput(calc.four.value)>
+                                <input type="button" name="five" value="5" OnClick= NumInput(calc.five.value)>
+                                <input type="button" name="six" value="6" OnClick= NumInput(calc.six.value)>
+                                <input type="button" name="sub" value="-" OnClick= NumInput(calc.sub.value)>
+                                <input type="button" name="add" value="sin" OnClick= Sin(calc.InputDis.value)>
+                                <input type="button" name="MMinus" value="M-" OnClick= MemMinus(calc.InputDis.value)>
+                                <br>
+                                <input type="button" name="seven" value="7" OnClick= NumInput(calc.seven.value)>
+                                <input type="button" name="eight" value="8" OnClick= NumInput(calc.eight.value)>
+                                <input type="button" name="nine" value="9" OnClick= NumInput(calc.nine.value)>
+                                <input type="button" name="mul" value="*" OnClick= NumInput(calc.mul.value)>
+                                <input type="button" name="add" value="cos" OnClick= Cos(calc.InputDis.value)>
+                                <input type="button" name="MInput" value="MI" id="MIBut" OnClick= MemInput()>
+                                <br>
+                                <input type="button" name="clear" value="c" OnClick="calc.InputDis.value = ''">
+                                <input type="button" name="zero" value="0" OnClick= NumInput(calc.zero.value)>
+                                <input type="button" name="doit" value="=" OnClick= Equal(calc.InputDis.value)>
+                                <input type="button" name="div"  value="/" OnClick= NumInput(calc.div.value)>
+                                <input type="button" name="point" value="." OnClick= NumInput(calc.point.value)>
+                                <input type="button" name="MDel" value="MD" id="MDBut" OnClick= MemDel()>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <textarea class="History" id="History" width=210px readonly="true"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <script src="script.js"></script>
+            </div>
+        </div>
+    </body>
+</html>
